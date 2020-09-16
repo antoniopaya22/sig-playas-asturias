@@ -1,0 +1,22 @@
+---
+
+version: '3.7'
+services:
+  sig-backend:
+      image: sig-backend
+      command: python server.py prod
+      container_name: sig-backend
+      deploy:
+        replicas: 1
+      ports:
+        - "3000:3000"
+
+  sig-frontend:
+    build: sig-frontend
+    container_name: sig-frontend
+    deploy:
+      replicas: 1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "sig-backend"
