@@ -1,20 +1,21 @@
+FROM node:12
 
-FROM node:11.13.0-alpine
+ENV PORT 8080
 
-RUN mkdir -p /usr/src/nuxt-app
-WORKDIR /usr/src/nuxt-app
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN apk update && apk upgrade
-RUN apk add python
-RUN apk add git
-
-COPY . /usr/src/nuxt-app/
+# Installing dependencies
+COPY package*.json /usr/src/app/
 RUN npm install
-RUN npm run build
 
+# Copying source files
+COPY . /usr/src/app
+
+# Building app
+RUN npm run build
 EXPOSE 8080
 
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
-
-CMD [ "npm", "start" ]
+# Running the app
+CMD "npm" "start"

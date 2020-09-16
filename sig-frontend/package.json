@@ -1,18 +1,15 @@
 {
   "name": "sig-frontend",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.12.0",
-    "nuxt": "^2.14.0"
-  },
-  "devDependencies": {
-    "@nuxtjs/vuetify": "^1.11.2"
+    "next": "9.5.3",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   }
 }

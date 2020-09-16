@@ -5,17 +5,17 @@ services:
   sig-backend:
       build: sig-backend
       container_name: sig-backend
-      deploy:
-        replicas: 1
       ports:
         - "3000:3000"
 
   sig-frontend:
     build: sig-frontend
     container_name: sig-frontend
-    deploy:
-      replicas: 1
+    volumes:
+      - ./sig-frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
     ports:
-      - "80:80"
+      - "8080:8080"
     depends_on:
       - "sig-backend"
