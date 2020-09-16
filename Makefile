@@ -11,5 +11,5 @@ remove:
 	docker-compose down --volumes
 
 remove-img:
-	docker rmi -f $(docker images -q)
+	docker rmi -f $(sudo docker images -q)
 

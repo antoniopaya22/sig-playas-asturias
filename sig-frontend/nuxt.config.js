@@ -82,5 +82,9 @@ export default {
      ** Build configuration
      ** See https://nuxtjs.org/api/configuration-build/
      */
-    build: {}
+    build: {},
+    server: {
+        port: 8080, // default: 3000
+        host: '0.0.0.0' // default: localhost
+    }
 }
