@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 
 RUN apk update && apk upgrade
-RUN apt-get update || : && apt-get install python -y
+RUN apk add python
 RUN apk add git
 
 COPY . /usr/src/nuxt-app/
