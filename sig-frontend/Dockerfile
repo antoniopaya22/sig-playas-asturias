@@ -1,14 +1,19 @@
-############################################################
-# Dockerfile Vue - NGINX
-############################################################
 
-FROM node:12.2.0-alpine
+FROM node:11.13.0-alpine
 
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package.json /app/package.json
+RUN mkdir -p /usr/src/nuxt-app
+WORKDIR /usr/src/nuxt-app
 
+RUN apk update && apk upgrade
+RUN apk add git
+
+COPY . /usr/src/nuxt-app/
 RUN npm install
-RUN npm install @vue/cli@3.7.0 -g
+RUN npm run build
 
-CMD ["npm", "run", "serve"]
+EXPOSE 8080
+
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=3000
+
+CMD [ "npm", "start" ]
