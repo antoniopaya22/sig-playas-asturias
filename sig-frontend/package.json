@@ -1,15 +1,19 @@
 {
-  "name": "sig-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+    "name": "sig-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev -p 8080",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "@material-ui/core": "latest",
+        "@material-ui/icons": "latest",
+        "clsx": "latest",
+        "next": "latest",
+        "prop-types": "latest",
+        "react": "latest",
+        "react-dom": "latest"
+    }
 }
