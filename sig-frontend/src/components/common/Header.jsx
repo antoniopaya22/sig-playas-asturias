@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
 
 
 export default function Header() {
@@ -14,9 +14,10 @@ export default function Header() {
                             <NavLink tag={RRNavLink} to="/">Inicio</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink tag={RRNavLink} to="/ocupacion">Ocupación</NavLink>
+                            <NavLink tag={RRNavLink} to="/historial">Historial</NavLink>
                         </NavItem>
                     </Nav>
+                    <NavbarText>Sergio Berjano | Daniel Cabal | Alba Cotarelo | Antonio Payá</NavbarText>
                 </div>
             </Navbar>
         </header>

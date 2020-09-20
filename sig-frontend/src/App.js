@@ -2,9 +2,8 @@ import React from 'react';
 import './App.css';
 import Header from './components/common/Header';
 import { Route, Switch } from 'react-router-dom';
-import Inicio from './components/pages/Inicio';
-import Ocupacion from './components/pages/Ocupacion';
-import Footer from './components/common/Footer';
+import Inicio from './components/pages/inicio/Inicio';
+import Historial from './components/pages/historial/Historial';
 
 function App() {
   return (
@@ -13,10 +12,9 @@ function App() {
       <main>
         <Switch>
           <Route path="/" component={Inicio} exact={true}/>
-          <Route path="/ocupacion" component={Ocupacion} exact={true}/>
+          <Route path="/historial" component={Historial} exact={true}/>
         </Switch>
       </main>
-      <Footer/>
     </>
   );
 }
