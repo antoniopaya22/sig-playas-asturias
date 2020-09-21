@@ -7,8 +7,8 @@ export const getPlayas = payload => {
         .catch(handleError);
 }
 
-export const getDestinos = payload => {
-    return fetch(`${config.apiUrl}/playas`)
+export const getRuta = payload => {
+    return fetch(`${config.apiUrl}/rutas`)
         .then(handleResponse)
         .catch(handleError);
 }

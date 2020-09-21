@@ -8,14 +8,14 @@ import { actions } from '../../../constants';
 export const MapContext = React.createContext();
 const initialState = {
     origen: null,
-    destino: null,
+    ruta: null,
     playas: []
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case actions.ACTUALIZAR_DESTINOS:
-            return { destino: action.data };
+        case actions.ACTUALIZAR_RUTA:
+            return { ...state, ruta: action.data };
 
         case actions.ACTUALIZAR_POSICIONES:
             return { playas: action.data.playas, origen: action.data.origen };

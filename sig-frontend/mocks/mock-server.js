@@ -12,9 +12,9 @@ const api = {
         url: '/api/playas',
         file: './json/playas.json'
     },
-    destinos: {
+    rutas: {
         url: '/api/search',
-        file: './json/destinos.json'
+        file: './json/rutas.json'
     }
 };
 
@@ -23,6 +23,6 @@ server.get(api.playas.url, (req, res) => {
     res.send(JSON.stringify(require(api.playas.file)));
 });
 
-server.get(api.destinos.url, (req, res) => {
-    res.send(JSON.stringify(require(api.destinos.file)));
+server.get(api.rutas.url, (req, res) => {
+    res.send(JSON.stringify(require(api.rutas.file)));
 });
