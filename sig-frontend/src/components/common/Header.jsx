@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, NavbarText, Container } from 'reactstrap';
 
 
 export default function Header() {
@@ -8,7 +8,7 @@ export default function Header() {
         <header>
             <Navbar color="dark" dark expand="lg">
                 <NavbarBrand tag={RRNavLink} to="/">Ocupación de las playas de Asturias</NavbarBrand>
-                <div className="container">
+                <Container>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
                             <NavLink tag={RRNavLink} to="/">Inicio</NavLink>
@@ -18,7 +18,7 @@ export default function Header() {
                         </NavItem>
                     </Nav>
                     <NavbarText>Sergio Berjano | Daniel Cabal | Alba Cotarelo | Antonio Payá</NavbarText>
-                </div>
+                </Container>
             </Navbar>
         </header>
     )

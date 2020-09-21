@@ -1,29 +1,39 @@
-[{
-    "nombre": "Los Quebrantos",
-    "coordenadas": {
-        "lat": "43.565277",
-        "lng": "-6.065323"
+{
+    "origen": {
+        "coordenadas": {
+            "lat": "43.364365", 
+            "lng": "-5.849002"
+        }
     },
-    "ocupacion": "alta"
-}, {
-    "nombre": "Salinas",
-    "coordenadas": {
-        "lat": "43.578554",
-        "lng": "-5.958697"
-    },
-    "ocupacion": "media"
-}, {
-    "nombre": "La Griega",
-    "coordenadas": {
-        "lat": "43.500715",
-        "lng": "-5.259679"
-    },
-    "ocupacion": "baja"
-}, {
-    "nombre": "Torimbia",
-    "coordenadas": {
-        "lat": "43.441797",
-        "lng": "-4.852024"
-    },
-    "ocupacion": "excesiva"
-}]
+    "playas": [
+        {
+            "nombre": "Los Quebrantos",
+            "coordenadas": {
+                "lat": "43.565277",
+                "lng": "-6.065323"
+            },
+            "ocupacion": "alta"
+        }, {
+            "nombre": "Salinas",
+            "coordenadas": {
+                "lat": "43.578554",
+                "lng": "-5.958697"
+            },
+            "ocupacion": "media"
+        }, {
+            "nombre": "La Griega",
+            "coordenadas": {
+                "lat": "43.500715",
+                "lng": "-5.259679"
+            },
+            "ocupacion": "baja"
+        }, {
+            "nombre": "Torimbia",
+            "coordenadas": {
+                "lat": "43.441797",
+                "lng": "-4.852024"
+            },
+            "ocupacion": "excesiva"
+        }
+    ]
+}

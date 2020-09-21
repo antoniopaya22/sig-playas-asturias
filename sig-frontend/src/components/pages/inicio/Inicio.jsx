@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import MapContainer from './MapContainer';
 import './Inicio.css';
+import { Container, Row, Col } from 'reactstrap';
 import Busqueda from './Busqueda';
 import { actions } from '../../../constants';
 
@@ -13,12 +14,12 @@ const initialState = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case actions.ACTUALIZAR_ORIGEN: 
-            return { origen: action.data };
-
-        case actions.ACTUALIZAR_DESTINO:
+        case actions.ACTUALIZAR_DESTINOS:
             return { destino: action.data };
 
+        case actions.ACTUALIZAR_POSICIONES:
+            return { playas: action.data.playas, origen: action.data.origen };
+            
         default:
             return initialState;
     }
@@ -29,16 +30,16 @@ export default function Inicio() {
 
     return(
         <MapContext.Provider value={{ state, dispatch }}>
-            <div className="container-fluid inicio">
-                <div className="row">
-                    <section className="col-12 col-lg-9">
+            <Container fluid={true} className="inicio">            
+                <Row>
+                    <Col xs={12} lg={9} tag="section">
                         <MapContainer/>
-                    </section>
-                    <aside className="col-12 col-lg-3">
+                    </Col>
+                    <Col xs={12} lg={3} tag="aside">
                         <Busqueda />
-                    </aside>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         </MapContext.Provider>
     );
 }

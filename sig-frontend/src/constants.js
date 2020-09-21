@@ -1,5 +1,5 @@
 const dev = {
-    apiUrl: 'http://localhost:3000/api'
+    apiUrl: 'http://localhost:3001/api'
 };
 const prod = {
     apiUrl: ''
@@ -10,8 +10,8 @@ export const config = process.env.NODE_ENV === 'development' ? dev : prod;
 export const apiKey = 'AIzaSyCwYm3CgrdQQM_abaP45IH0OpCovrwyPQs';
 
 export const actions = {
-    ACTUALIZAR_ORIGEN: 'ACTUALIZAR_ORIGEN',
-    ACTUALIZAR_DESTINO: 'ACTUALIZAR_DESTINO'
+    ACTUALIZAR_DESTINO: 'ACTUALIZAR_DESTINO',
+    ACTUALIZAR_POSICIONES: 'ACTUALIZAR_POSICIONES'
 };
 
 export const icons = {

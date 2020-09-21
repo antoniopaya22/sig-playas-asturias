@@ -12,16 +12,17 @@ const api = {
         url: '/api/playas',
         file: './json/playas.json'
     },
-    distancia: {
+    destinos: {
         url: '/api/search',
-        file: './json/distancia.json'
+        file: './json/destinos.json'
     }
 };
 
 server.get(api.playas.url, (req, res) => {
-    res.send(JSON.stringify(require(api.testGet.file)));
+    console.log(api.playas.file);
+    res.send(JSON.stringify(require(api.playas.file)));
 });
 
-server.get(api.distancia.url, (req, res) => {
-    res.send(JSON.stringify(require(api.testPost.file)));
+server.get(api.destinos.url, (req, res) => {
+    res.send(JSON.stringify(require(api.destinos.file)));
 });

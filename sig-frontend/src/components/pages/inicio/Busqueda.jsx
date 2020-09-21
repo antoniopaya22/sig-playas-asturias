@@ -2,17 +2,24 @@ import React, { useContext } from 'react';
 import { MapContext } from './Inicio';
 import SimpleForm from './SimpleForm';
 import Leyenda from './Leyenda';
+import { Button } from 'reactstrap';
 import { actions } from '../../../constants';
+import { getPlayas } from '../../../api/inicioApi';
 
 export default function Busqueda() {
     const { state, dispatch } = useContext(MapContext);
 
     const handleSubmitSearch = (e) => {
         e.preventDefault();
-        dispatch({
-            type: actions.ACTUALIZAR_ORIGEN, 
-            data: { lat: 43.364365, lng: -5.849002 }
-        });
+        getPlayas()
+            .then(result => {
+                dispatch({
+                    type: actions.ACTUALIZAR_POSICIONES,
+                    data: result
+                })
+            })
+            .catch(error => console.error(error));
+
     };
 
     const handleRuta = (e) => {
@@ -25,7 +32,7 @@ export default function Busqueda() {
             <SimpleForm onSubmit={handleSubmitSearch} />
             <Leyenda />
             {state.destino && 
-                <button type="button" className="btn btn-secondary btn-block" onClick={handleRuta}>Calcular ruta</button>
+                <Button block={true} onClick={handleRuta}>CalcularRuta</Button>
             }
         </div>
     );

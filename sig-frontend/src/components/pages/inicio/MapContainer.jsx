@@ -18,16 +18,19 @@ export default function MapContainer() {
                     zoom={9} 
                     mapContainerStyle={mapStyles} >
 
-                    { state.origen &&
-                        <Marker position={ state.origen } icon={icons.hotel} /> 
+                    { state.origen && 
+                        <Marker position={{lat: Number(state.origen.coordenadas.lat), lng: Number(state.origen.coordenadas.lng)}} icon={icons.hotel} /> 
                     }
                     { state.destino &&
-                        <Marker position={state.destino} />
+                        <Marker position={{lat: Number(state.destino.lat), lng: Number(state.destino.lng)}} />
                     }
                     {
                         state.playas && state.playas.length && state.playas.map(p => {
+                            let lat = Number(p.coordenadas.lat);
+                            let lng = Number(p.coordenadas.lng);
+
                             return (
-                                <Marker position={p.posicion} icon={icons[p.ocupacion]} />
+                                <Marker position={{lat, lng}} icon={icons[p.ocupacion]} key={p.nombre} />
                             )
                         })
                     }
