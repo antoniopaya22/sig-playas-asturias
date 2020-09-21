@@ -29,6 +29,12 @@ class OccupationRepository:
             return False
         return True
 
+    @staticmethod
+    def get_occupations_by_playa_id(playa_id):
+        try:
+            return Occupation.query.filter_by(playa_id=playa_id).all()
+        except:
+            return None
 
     @staticmethod
     def get_occupation_by_id(id):
