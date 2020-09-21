@@ -30,6 +30,16 @@ class BeachRepository:
         return True
 
     @staticmethod
+    def cambiar_ocupacion_actual(id, ocupacion):
+        try:
+            beach = Beach.query.get(id)
+            beach.ocupacion_actual = ocupacion
+            db.session.commit()
+        except:
+            return False
+        return True
+
+    @staticmethod
     def get_beach_by_playa_id(playa_id):
         try:
             return Beach.query.filter_by(playa_id=playa_id).one()

@@ -1,12 +1,4 @@
-import binascii
-import hashlib
-import os
-
-from flask import abort
-from api.models.beach import Beach
 from api.repository.beach_repository import BeachRepository
-from api.cloud.beach_cloud import BeachCloud
-
 
 
 class BeachController:
@@ -17,17 +9,26 @@ class BeachController:
         return [x.to_json() for x in beaches]
 
     @staticmethod
-    def get_occupation():
-        beaches = BeachCloud.get_occupation()
-        return beaches
-
-    @staticmethod
-    def get_all_beaches_from_cloud():
-        beaches = BeachCloud.get_all_beaches()
-        return beaches
-
-    @staticmethod
     def get_beach_by_id(id):
-        beach = BeachCloud.get_beach_by_id(id)
+        beach = BeachRepository.get_beach_by_id(id)
         return beach
-        
+
+    @staticmethod
+    def search_beach(body):
+        beaches = [x for x in BeachRepository.get_all_beaches() if
+                   comparar(x.accesos, body.accesos) and
+                   comparar(x.material, body.material) and
+                   comparar(x.concejo, body.concejo) and
+                   comparar(x.longitud, body.longitud) and
+                   comparar(x.salvamento, body.salvamento)
+                   ]
+        return beaches
+
+
+def comparar(att, value):
+    if att is None or att == "":
+        return True
+    elif att == value:
+        return True
+    else:
+        return False
