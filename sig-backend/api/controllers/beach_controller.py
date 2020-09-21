@@ -25,4 +25,9 @@ class BeachController:
     def get_all_beaches_from_cloud():
         beaches = BeachCloud.get_all_beaches()
         return beaches
+
+    @staticmethod
+    def get_beach_by_id(id):
+        beach = BeachCloud.get_beach_by_id(id)
+        return beach
         

@@ -6,20 +6,27 @@ from bs4 import BeautifulSoup
 
 class BeachCloud:
 
+    @staticmethod
+    def get_beaches():
+
     # devuelve ocupacion de la API
     @staticmethod
     def get_occupation():
         try:
-            url = 'https://playas.asturias.es/ocupacion.json'
-            r = requests.get(url)
-            beaches = r.json()
+            url_occupation = 'https://playas.asturias.es/ocupacion.json'
+            url_beaches = 'https://playas.asturias.es/playas.json'
+            r_occupation = requests.get(url_occupation)
+            r_beaches = requests.get(url_beaches)
+            beaches_occ = r_occupation.json()
+            beaches_list = r_beaches.json()
             parsed_beaches = {}
-            for key in beaches:
+            for key in beaches_occ:
                 new_beach = {}
                 new_beach['id'] = 0 
-                new_beach['concejo'] = beaches[key]['concejo']
-                new_beach['estado'] = beaches[key]['estado']
-                new_beach['fotos'] = beaches[key]['fotos']
+                new_beach['concejo'] = beaches_occ[key]['concejo']
+                new_beach['estado'] = beaches_occ[key]['estado']
+                new_beach['fotos'] = beaches_occ[key]['fotos']
+                new_beach['coordenadas'] = [beaches_list[key]['coord_x'],beaches_list[key]['coord_y']]
                 parsed_beaches[key] = new_beach
             return parsed_beaches
         except Exception as e:
@@ -54,6 +61,7 @@ class BeachCloud:
             new_beach['salvamento'] = properties['salvamento']
             new_beach['nucleorural'] = properties['nucleo rural'] # nucleo rural cercano 
             new_beach['nucleourbano'] = properties['nucleo urbano'] # nucleo urbano cercano
+            new_beach['ocupacionmedia'] = properties['grado de uso'] 
 
             parsed_beaches.append(new_beach)
         
