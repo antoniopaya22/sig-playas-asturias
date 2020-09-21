@@ -13,7 +13,7 @@ class BeachController:
 
     @staticmethod
     def get_all_beaches():
-        beaches = BeachesRepository.get_all_beaches()
+        beaches = BeachRepository.get_all_beaches()
         return [x.to_json() for x in beaches]
 
     @staticmethod

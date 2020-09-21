@@ -1,13 +1,15 @@
 import requests
 import json
-import kml2geojson
 from pathlib import Path
 from bs4 import BeautifulSoup
+
 
 class BeachCloud:
 
     @staticmethod
     def get_beaches():
+        pass
+
 
     # devuelve ocupacion de la API
     @staticmethod
@@ -34,16 +36,17 @@ class BeachCloud:
             return {}
 
     # devuelve atributos interesantes del kml/geojson
+
     @staticmethod
     def get_all_beaches():
-        #  kml2geojson.main.convert('C:/Users/alba1/Desktop/trabajos/master/segundo/SIG/ProyectoFinal/doc.kml', 'geo.json') # con lo que parseé el kml
+        # import kml2geojson kml2geojson.main.convert(
+        # 'C:/Users/alba1/Desktop/trabajos/master/segundo/SIG/ProyectoFinal/doc.kml', 'geo.json')
         json_file = Path('geojson/doc.geojson').resolve()
         json_file = open(json_file)
         beaches = json.load(json_file)['features']
         parsed_beaches = []
         for value in beaches:
-            new_beach = {}
-            new_beach['coordenadas'] = value['geometry']['coordinates']
+            new_beach = {'coordenadas': value['geometry']['coordinates']}
             description = value['properties']['description']
             soup = BeautifulSoup(description, features="lxml")
             all_tds = soup.find_all('td')
@@ -60,10 +63,10 @@ class BeachCloud:
             new_beach['longitud'] = properties['longitud']
             new_beach['material'] = properties['material']
             new_beach['salvamento'] = properties['salvamento']
-            new_beach['nucleorural'] = properties['nucleo rural'] # nucleo rural cercano 
-            new_beach['nucleourbano'] = properties['nucleo urbano'] # nucleo urbano cercano
-            new_beach['ocupacionmedia'] = properties['grado de uso'] 
+            new_beach['nucleorural'] = properties['nucleo rural']  # nucleo rural cercano
+            new_beach['nucleourbano'] = properties['nucleo urbano']  # nucleo urbano cercano
+            new_beach['ocupacionmedia'] = properties['grado de uso']
 
             parsed_beaches.append(new_beach)
-        
+
         return parsed_beaches
