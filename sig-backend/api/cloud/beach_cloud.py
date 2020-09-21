@@ -22,7 +22,7 @@ class BeachCloud:
             parsed_beaches = {}
             for key in beaches_occ:
                 new_beach = {}
-                new_beach['id'] = 0 
+                new_beach['id'] = 0
                 new_beach['concejo'] = beaches_occ[key]['concejo']
                 new_beach['estado'] = beaches_occ[key]['estado']
                 new_beach['fotos'] = beaches_occ[key]['fotos']
@@ -50,8 +50,9 @@ class BeachCloud:
             properties = {}
             for i in range(2, len(all_tds), 2):
                 properties[all_tds[i].string.lower()] = all_tds[i+1].string
-            new_beach['id'] = 0           
-            new_beach['nombre'] = properties['nombre']            
+            new_beach['id'] = 0
+            new_beach['playa_id'] = 0
+            new_beach['nombre'] = properties['nombre']
             new_beach['accesos'] = properties['accesos']
             new_beach['camping'] = properties['camping']
             new_beach['concejo'] = properties['concejo']
