@@ -1,6 +1,5 @@
 from flask import Flask
 from .config import get_mode
-from .load import load_geojson
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -14,6 +13,7 @@ def create_app(mode):
 
     app.app_context().push()
     # Import beaches to DB
+    from .load import load_geojson
     load_geojson()
     # Imports Routes
     from .routes import beach_routes

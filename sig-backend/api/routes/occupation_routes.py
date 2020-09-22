@@ -18,5 +18,5 @@ def get_occupations_by_id(id):
 
 @app.route('/api/occupations/playa/<int:id>', methods=['GET'])
 @cross_origin()
-def get_occupations_by_id(id):
+def get_occupation_by_playa_id(id):
     return OccupationController.get_occupation_by_playa_id(id)
