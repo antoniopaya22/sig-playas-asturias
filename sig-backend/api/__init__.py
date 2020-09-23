@@ -24,6 +24,6 @@ def create_app(mode):
     load_geojson()
     # Load every 100 seconds occupations on DB
     from api.data.load_occupations import load_occupations
-    load_occupations()
+    load_occupations(app)
 
     return app
