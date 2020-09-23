@@ -16,7 +16,7 @@ class Beach(db.Model):
     nucleo_rural = db.Column(db.String(64))
     nucleo_urbano = db.Column(db.String(64))
     ocupacion_media = db.Column(db.String(64))
-    ocupacion_actual = db.Column(db.String(64))
+    ocupacion_actual = db.Column(db.Float)
     latitud = db.Column(db.Float)
     longitud = db.Column(db.Float)
 
@@ -42,4 +42,4 @@ class Beach(db.Model):
         }
 
     def __repr__(self):
-        return '<Beach {}>'.format(self.name)
+        return '<Beach {}>'.format(self.nombre)

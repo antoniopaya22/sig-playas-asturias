@@ -16,7 +16,8 @@ class BeachRepository:
         try:
             db.session.add(beach)
             db.session.commit()
-        except:
+        except Exception as err:
+            print(err)
             return False
         return True
 
@@ -30,9 +31,9 @@ class BeachRepository:
         return True
 
     @staticmethod
-    def cambiar_ocupacion_actual(id, ocupacion):
+    def cambiar_ocupacion_actual(playa_id, ocupacion):
         try:
-            beach = Beach.query.get(id)
+            beach = Beach.query.filter_by(playa_id=playa_id).one()
             beach.ocupacion_actual = ocupacion
             db.session.commit()
         except:

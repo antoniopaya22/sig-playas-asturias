@@ -35,3 +35,6 @@ urllib3==1.25.10
 wcwidth==0.1.8
 Werkzeug==0.16.0
 zipp==2.0.0
+
+Shapely~=1.7.1
+APScheduler~=3.6.3

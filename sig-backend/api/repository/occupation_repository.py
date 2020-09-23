@@ -16,7 +16,8 @@ class OccupationRepository:
         try:
             db.session.add(occupation)
             db.session.commit()
-        except:
+        except Exception as err:
+            print(err)
             return False
         return True
 

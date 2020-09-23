@@ -8,7 +8,7 @@ from api.repository.beach_repository import BeachRepository
 
 
 def load_geojson():
-    print(get_static_info_from_geojson()[0].to_json())
+    get_static_info_from_geojson()
 
 
 def get_occupation_api_data():
@@ -21,20 +21,21 @@ def get_occupation_api_data():
     parsed_beaches = []
     for key in beaches_list:
         new_beach = {'playa_id': key}
-        if key in beaches_occ:
-            new_beach['ocupacion_actual'] = beaches_occ[key]['estado']
-            if len(beaches_occ[key]['fotos']) == 0:
-                new_beach['foto_tiempo_real'] = []
-            else:
-                new_beach['foto_tiempo_real'] = beaches_occ[key]['fotos'][0]
-        else:
-            new_beach['ocupacion_actual'] = None
-            new_beach['foto_tiempo_real'] = []
         try:
-            new_beach['longitud'] = float(beaches_list[key]['coord_x'])
-            new_beach['latitud'] = float(beaches_list[key]['coord_y'])
-            parsed_beaches.append(new_beach)
-        except:
+            if key in beaches_occ:
+                new_beach['ocupacion_actual'] = float(beaches_occ[key]['medicion'])
+                if len(beaches_occ[key]['fotos']) == 0:
+                    new_beach['foto_tiempo_real'] = None
+                else:
+                    new_beach['foto_tiempo_real'] = beaches_occ[key]['fotos'][0]
+            else:
+                new_beach['ocupacion_actual'] = -1.0
+                new_beach['foto_tiempo_real'] = None
+                new_beach['longitud'] = float(beaches_list[key]['coord_x'])
+                new_beach['latitud'] = float(beaches_list[key]['coord_y'])
+                parsed_beaches.append(new_beach)
+        except Exception as err:
+            print(err)
             pass
     return parsed_beaches
 
@@ -80,8 +81,8 @@ def get_static_info_from_geojson():
 
 def add_to_db(beach):
     if BeachRepository.get_beach_by_playa_id(beach.playa_id) is None:
-        print(beach.nombre)
         BeachRepository.add_beach(beach)
+
 
 def parse_coordinates(coordinates):
     coord_list = []
