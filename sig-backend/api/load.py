@@ -4,6 +4,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 from shapely.geometry import Point, Polygon
 from api.models.beach import Beach
+from api.repository.beach_repository import BeachRepository
 
 
 def load_geojson():
@@ -18,17 +19,16 @@ def get_occupation_api_data():
     beaches_occ = r_occupation.json()
     beaches_list = r_beaches.json()
     parsed_beaches = []
-
     for key in beaches_list:
         new_beach = {'playa_id': key}
         if key in beaches_occ:
-            new_beach['ocupacionactual'] = beaches_occ[key]['estado']
+            new_beach['ocupacion_actual'] = beaches_occ[key]['estado']
             if len(beaches_occ[key]['fotos']) == 0:
                 new_beach['foto_tiempo_real'] = []
             else:
                 new_beach['foto_tiempo_real'] = beaches_occ[key]['fotos'][0]
         else:
-            new_beach['ocupacionactual'] = None
+            new_beach['ocupacion_actual'] = None
             new_beach['foto_tiempo_real'] = []
         try:
             new_beach['longitud'] = float(beaches_list[key]['coord_x'])
@@ -46,7 +46,6 @@ def get_static_info_from_geojson():
     parsed_static_beaches = []
     parsed_real_time_beaches = get_occupation_api_data()
     for real_time_beach in parsed_real_time_beaches:
-
         for static_beach in beaches:
             coordinates = static_beach['geometry']['coordinates']
             if is_coord_in_polygon(real_time_beach['longitud'], real_time_beach['latitud'], coordinates):
@@ -70,13 +69,19 @@ def get_static_info_from_geojson():
                     nucleo_rural=properties['nucleo rural'],
                     nucleo_urbano=properties['nucleo urbano'],
                     ocupacion_media=properties['grado de uso'],
-                    ocupacion_actual=real_time_beach['ocupacionactual'],
+                    ocupacion_actual=real_time_beach['ocupacion_actual'],
                     longitud=real_time_beach['longitud'],
                     latitud=real_time_beach['latitud']
                 )
+                add_to_db(new_beach)
                 parsed_static_beaches.append(new_beach)
     return parsed_static_beaches
 
+
+def add_to_db(beach):
+    if BeachRepository.get_beach_by_playa_id(beach.playa_id) is None:
+        print(beach.nombre)
+        BeachRepository.add_beach(beach)
 
 def parse_coordinates(coordinates):
     coord_list = []
