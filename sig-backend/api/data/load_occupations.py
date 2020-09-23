@@ -23,15 +23,15 @@ def _load_occupations(app):
     for playa_id in beaches_occ:
         beach = beaches_occ[playa_id]
         try:
-            BeachRepository.cambiar_ocupacion_actual(playa_id, beach['medicion'])
-            occupation = Occupation(
-                playa_id=playa_id,
-                timestamp=beach['hora'],
-                occupacion=float(beach['medicion']),
-                bajamar=beach['bajamar'],
-                pleamar=beach['pleamar']
-            )
             with app.app_context():
+                BeachRepository.cambiar_ocupacion_actual(playa_id, float(beach['medicion']))
+                occupation = Occupation(
+                    playa_id=playa_id,
+                    timestamp=beach['hora'],
+                    occupacion=float(beach['medicion']),
+                    bajamar=beach['bajamar'],
+                    pleamar=beach['pleamar']
+                )
                 OccupationRepository.add_occupation(occupation)
         except Exception as err:
             pass
