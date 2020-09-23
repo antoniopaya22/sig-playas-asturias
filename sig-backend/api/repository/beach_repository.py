@@ -34,9 +34,11 @@ class BeachRepository:
     def cambiar_ocupacion_actual(playa_id, ocupacion):
         try:
             beach = Beach.query.filter_by(playa_id=playa_id).one()
+            print(beach.to_json())
             beach.ocupacion_actual = ocupacion
             db.session.commit()
-        except:
+        except Exception as e:
+            print(e)
             return False
         return True
 
@@ -53,7 +55,7 @@ class BeachRepository:
             return Beach.query.get(id)
         except:
             return None
-
+    """
     @staticmethod
     def cambiar_ocupacion_actual(id, ocupacion):
         try:
@@ -63,3 +65,4 @@ class BeachRepository:
         except:
             return False
         return True
+    """
