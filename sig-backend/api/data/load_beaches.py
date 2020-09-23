@@ -34,8 +34,7 @@ def get_occupation_api_data():
                 new_beach['longitud'] = float(beaches_list[key]['coord_x'])
                 new_beach['latitud'] = float(beaches_list[key]['coord_y'])
                 parsed_beaches.append(new_beach)
-        except Exception as err:
-            print(err)
+        except:
             pass
     return parsed_beaches
 
