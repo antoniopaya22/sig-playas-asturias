@@ -13,7 +13,8 @@ export const wmsUrl = 'https://sig.asturias.es/servicios/services/PlayasYFaros/M
 export const actions = {
     ACTUALIZAR_RUTA: 'ACTUALIZAR_RUTA',
     ACTUALIZAR_PLAYAS: 'ACTUALIZAR_PLAYAS',
-    SELECCIONAR_PLAYA: 'SELECCIONAR_PLAYA'
+    SELECCIONAR_PLAYA: 'SELECCIONAR_PLAYA',
+    SET_INFOWINDOW: 'SET_INFOWINDOW'
 };
 
 export const icons = {

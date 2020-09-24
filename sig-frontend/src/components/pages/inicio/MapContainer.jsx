@@ -1,16 +1,15 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { MapContext } from '../../../context/MapContext';
-import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { actions, apiKey, icons, wmsUrl } from '../../../constants';
 import { getPlayas } from '../../../api/inicioApi';
-import Playas from '../../common/Playas';
+import Playa from '../../common/Playa';
 
 const centro = { lat: 43.364365, lng: -5.849002 };
-const mapStyles = {width: '100%', height: '90%'};
+const mapStyles = {width: '100%', height: '100%'};
 export default function MapContainer() {
     const { state, dispatch } = useContext(MapContext);
-    const [map, setMap] = useState(null);
-    let marcadores = [];
+    // const [map, setMap] = useState(null);
 
     const EXTENT = [-Math.PI * 6378137, Math.PI * 6378137];
 
@@ -52,33 +51,24 @@ export default function MapContainer() {
   
     // }
 
-    const onLoad = () => {
+    const onLoad = map => {
+        dispatch({
+            type: actions.SET_INFOWINDOW,
+            data: map
+        });
+    
         getPlayas()
         .then(result => {
             dispatch({
                 type: actions.ACTUALIZAR_PLAYAS,
                 data: result
             });
-            marcadores = [...result];
         })
         .catch(error => console.error(error));
-    }
-
-    const handlePlayaClick = (e) => {
-        const { playas } = state;
-        const lat = e.latLng.lat();
-        const lng = e.latLng.lng();
-        const playaSeleccionada = playas.find(p => p.longitud == lng && p.latitud == lat);
-        dispatch({
-            type: actions.SELECCIONAR_PLAYA,
-            data: playaSeleccionada
-        })
-        console.log();
-    }
+    };
 
     return (
         <div className="map-container">
-            <p>sel: {state.playa}</p>
             <LoadScript googleMapsApiKey={apiKey}>
                 <GoogleMap 
                     onLoad={onLoad}
@@ -89,12 +79,7 @@ export default function MapContainer() {
                     <Marker position={centro} icon={icons.hotel} /> 
                     
                     { state.playas && state.playas.length && 
-                        <Playas handleClick={handlePlayaClick} playas={state.playas} />
-                    }
-                    { state.seleccionada && 
-                        <InfoWindow position={{lat: state.seleccionada.latitud, lng: state.seleccionada.longitud}}>
-                            <p><strong>{state.seleccionada.camping}</strong></p>
-                        </InfoWindow>
+                        state.playas.map ( p => <Playa playa={p} key={p.id} /> )
                     }
                 </GoogleMap>
             </LoadScript>

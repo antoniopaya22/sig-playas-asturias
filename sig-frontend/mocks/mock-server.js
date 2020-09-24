@@ -19,7 +19,6 @@ const api = {
 };
 
 server.get(api.playas.url, (req, res) => {
-    console.log(api.playas.file);
     res.send(JSON.stringify(require(api.playas.file)));
 });
 

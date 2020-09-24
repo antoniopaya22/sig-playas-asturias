@@ -21,3 +21,22 @@
     text-align: center;
     padding: 10px 0;
 }
+
+.gm-style-iw {
+    width: 350px;
+    height: 300px;
+}
+
+.info-playa h1 {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.info-playa img {
+    max-width: 250px;
+}
+
+.info-playa dt {
+    display: inline-block;
+    margin-right: 10px;
+}
