@@ -19,4 +19,4 @@ def get_beach_by_id(id):
 @app.route('/api/search', methods=['POST'])
 @cross_origin()
 def search_beach():
-    return BeachController.search_beach(request)
+    return jsonify(BeachController.search_beach(request))

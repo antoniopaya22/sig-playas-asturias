@@ -9,7 +9,7 @@ from api.models.occupation import Occupation
 
 def load_occupations(app):
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=_load_occupations, args=[app], trigger="interval", seconds=5)
+    scheduler.add_job(func=_load_occupations, args=[app], trigger="interval", minutes=60)
     scheduler.start()
 
     # Shut down the scheduler when exiting the app
@@ -33,6 +33,5 @@ def _load_occupations(app):
                     pleamar=beach['pleamar']
                 )
                 OccupationRepository.add_occupation(occupation)
-        except Exception as err:
+        except:
             pass
-

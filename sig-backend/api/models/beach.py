@@ -23,7 +23,7 @@ class Beach(db.Model):
     def to_json(self):
         return {
             "id": self.id,
-            "play_id": self.playa_id,
+            "playa_id": self.playa_id,
             "nombre": self.nombre,
             "accesos": self.accesos,
             "camping": self.camping,
