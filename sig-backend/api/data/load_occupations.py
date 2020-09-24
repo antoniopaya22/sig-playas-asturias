@@ -9,7 +9,7 @@ from api.models.occupation import Occupation
 
 def load_occupations(app):
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=_load_occupations, args=[app], trigger="interval", minutes=60)
+    scheduler.add_job(func=_load_occupations, args=[app], trigger="interval", minutes=0.2)
     scheduler.start()
 
     # Shut down the scheduler when exiting the app

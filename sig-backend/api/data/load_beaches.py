@@ -20,7 +20,6 @@ def get_occupation_api_data():
     beaches_occ = r_occupation.json()
     beaches_list = r_beaches.json()
     parsed_beaches = []
-    print(len(beaches_list))
     for key in beaches_list:
         new_beach = {'playa_id': key}
         try:
@@ -36,9 +35,10 @@ def get_occupation_api_data():
             new_beach['nombre'] = beaches_list[key]['nombre']
             new_beach['longitud'] = float(beaches_list[key]['coord_x'])
             new_beach['latitud'] = float(beaches_list[key]['coord_y'])
+            new_beach['municipio'] = beaches_list[key]['municipio']
             parsed_beaches.append(new_beach)
         except Exception as err:
-            print(err)
+            print(new_beach['nombre'] + " (" + beaches_list[key]['municipio'] + ") no se pudo cargar")
             pass
     return parsed_beaches
 
@@ -49,26 +49,28 @@ def get_static_info_from_geojson():
     beaches = json.load(json_file)['features']
     parsed_static_beaches = []
     parsed_real_time_beaches = get_occupation_api_data()
-    count = 0
-    for real_time_beach in parsed_real_time_beaches:
-        percentage = round(count / 79 * 100, 2)
-        print(percentage+'%')
-        count += 1
+    for static_beach in beaches:
+        coordinates = static_beach['geometry']['coordinates']
+        description = static_beach['properties']['description']
+        soup = BeautifulSoup(description, features="lxml")
+        all_tds = soup.find_all('td')
+        properties = {}
+        for i in range(2, len(all_tds), 2):
+            properties[all_tds[i].string.lower()] = all_tds[i + 1].string
         new_beach_coord = None
         new_beach_name = None
-        for static_beach in beaches:
-            coordinates = static_beach['geometry']['coordinates']
-            description = static_beach['properties']['description']
-            soup = BeautifulSoup(description, features="lxml")
-            all_tds = soup.find_all('td')
-            properties = {}
-            for i in range(2, len(all_tds), 2):
-                properties[all_tds[i].string.lower()] = all_tds[i + 1].string
+        for real_time_beach in parsed_real_time_beaches:
             if is_coord_in_polygon(real_time_beach['longitud'], real_time_beach['latitud'], coordinates):
                 new_beach_coord = create_beach(real_time_beach, properties)
-            elif is_name_the_same(real_time_beach['nombre'], properties['nombre']):
+                break
+            elif is_name_the_same(real_time_beach['nombre'], properties['nombre']) and \
+                    is_name_the_same(real_time_beach['municipio'], properties['concejo']) and \
+                    is_coord_near(real_time_beach['longitud'], real_time_beach['latitud'], coordinates, 0.001):
                 new_beach_name = create_beach(real_time_beach, properties)
-
+                break
+            elif is_coord_near(real_time_beach['longitud'], real_time_beach['latitud'], coordinates, 0.0009):
+                new_beach_name = create_beach(real_time_beach, properties)
+                break
         if new_beach_coord is not None:
             add_to_db(new_beach_coord)
             parsed_static_beaches.append(new_beach_coord)
@@ -76,9 +78,10 @@ def get_static_info_from_geojson():
             add_to_db(new_beach_name)
             parsed_static_beaches.append(new_beach_name)
         else:
-            print(real_time_beach['nombre'])
-
-    print(len(parsed_static_beaches))
+            new_beach_static = create_beach_static(coordinates, properties)
+            add_to_db(new_beach_static)
+            parsed_static_beaches.append(new_beach_static)
+            pass
     return parsed_static_beaches
 
 
@@ -103,9 +106,46 @@ def create_beach(real_time_beach, properties):
     )
     return new_beach
 
+
+def create_beach_static(coordinates, properties):
+    middle_point = calculate_middle_point(coordinates)
+    new_beach = Beach(
+        playa_id=None,
+        nombre=properties['nombre'],
+        accesos=properties['accesos'],
+        camping=properties['camping'],
+        concejo=properties['concejo'],
+        foto_estatica=properties['foto1'],
+        foto_tiempo_real=None,
+        longitud_playa=properties['longitud'],
+        material=properties['material'],
+        salvamento=properties['salvamento'],
+        nucleo_rural=properties['nucleo rural'],
+        nucleo_urbano=properties['nucleo urbano'],
+        ocupacion_media=properties['grado de uso'],
+        ocupacion_actual=-1,
+        longitud=middle_point[0],
+        latitud=middle_point[1]
+    )
+    return new_beach
+
+
+def calculate_middle_point(list_of_coords):
+    list_of_coords = parse_coordinates(list_of_coords)
+    poly = Polygon(list_of_coords)
+    return [poly.centroid.x, poly.centroid.y]
+
+
 def add_to_db(beach):
-    if BeachRepository.get_beach_by_playa_id(beach.playa_id) is None:
-        BeachRepository.add_beach(beach)
+    try:
+        if beach.playa_id is not None:
+            if BeachRepository.get_beach_by_playa_id(beach.playa_id) is None:
+                BeachRepository.add_beach(beach)
+        else:
+            if BeachRepository.get_beach_by_nombre_concejo(beach.nombre, beach.concejo) is None:
+                BeachRepository.add_beach(beach)
+    except Exception as e:
+        print(e)
 
 
 def parse_coordinates(coordinates):
@@ -122,5 +162,13 @@ def is_coord_in_polygon(coord_x, coord_y, list_of_coords):
     return poly.contains(pt)
 
 
+def is_coord_near(coord_x, coord_y, list_of_coords, threshold):
+    list_of_coords = parse_coordinates(list_of_coords)
+    pt = Point(coord_x, coord_y)
+    poly = Polygon(list_of_coords)
+    dist = pt.distance(poly)
+    return dist < threshold
+
+
 def is_name_the_same(name_a, name_b):
-    return name_a == name_b or Levenshtein.distance(name_a, name_b) <= 10
+    return name_a is name_b or Levenshtein.distance(name_a, name_b) <= 5

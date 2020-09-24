@@ -55,6 +55,13 @@ class BeachRepository:
             return Beach.query.get(id)
         except:
             return None
+
+    @staticmethod
+    def get_beach_by_nombre_concejo(nombre, concejo):
+        try:
+            return Beach.query.filter_by(nombre=nombre, concejo=concejo).one()
+        except:
+            return None
     """
     @staticmethod
     def cambiar_ocupacion_actual(id, ocupacion):
