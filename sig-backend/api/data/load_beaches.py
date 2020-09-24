@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 from shapely.geometry import Point, Polygon
 from api.models.beach import Beach
 from api.repository.beach_repository import BeachRepository
-import Levenshtein
 
 
 def load_geojson():
@@ -116,7 +115,7 @@ def create_beach_static(coordinates, properties):
         camping=properties['camping'],
         concejo=properties['concejo'],
         foto_estatica=properties['foto1'],
-        foto_tiempo_real=None,
+        foto_tiempo_real="",
         longitud_playa=properties['longitud'],
         material=properties['material'],
         salvamento=properties['salvamento'],
@@ -171,4 +170,4 @@ def is_coord_near(coord_x, coord_y, list_of_coords, threshold):
 
 
 def is_name_the_same(name_a, name_b):
-    return name_a is name_b or Levenshtein.distance(name_a, name_b) <= 5
+    return name_a is name_b
