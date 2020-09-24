@@ -14,7 +14,7 @@ class BeachController:
     @staticmethod
     def get_beach_by_id(id):
         beach = BeachRepository.get_beach_by_id(id)
-        return beach
+        return beach.to_json()
 
     @staticmethod
     def search_beach(request):
