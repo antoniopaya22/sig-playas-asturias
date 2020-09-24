@@ -1,0 +1,23 @@
+.inicio, 
+.inicio section, 
+.inicio aside,
+.inicio > div, 
+.map-container {
+    height: 100%;
+}
+.map-container {
+    margin: 0 -15px;
+}
+.busqueda {
+    padding-top: 20px;
+}
+.icon > img {
+    margin-left: 10px;
+    margin-right: 5px;
+    height: 12px;
+}
+
+.leyenda {
+    text-align: center;
+    padding: 10px 0;
+}
