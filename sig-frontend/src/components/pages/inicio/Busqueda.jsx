@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { MapContext } from './Inicio';
+import { MapContext } from '../../../context/MapContext';
 import SimpleForm from './SimpleForm';
 import Leyenda from './Leyenda';
 import { Button } from 'reactstrap';
@@ -12,14 +12,13 @@ export default function Busqueda() {
     const handleSubmitSearch = (e) => {
         e.preventDefault();
         getPlayas()
-            .then(result => {
-                dispatch({
-                    type: actions.ACTUALIZAR_POSICIONES,
-                    data: result
-                })
+        .then(result => {
+            dispatch({
+                type: actions.ACTUALIZAR_PLAYAS,
+                data: result
             })
-            .catch(error => console.error(error));
-
+        })
+        .catch(error => console.error(error));
     };
 
     const handleRuta = (e) => {

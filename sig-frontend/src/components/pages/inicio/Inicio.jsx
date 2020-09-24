@@ -1,32 +1,33 @@
 import React, { useReducer } from 'react';
 import MapContainer from './MapContainer';
+import { MapContext, mapReducer, initialState } from '../../../context/MapContext';
 import './Inicio.css';
 import { Container, Row, Col } from 'reactstrap';
 import Busqueda from './Busqueda';
-import { actions } from '../../../constants';
+// import { actions } from '../../../constants';
 
-export const MapContext = React.createContext();
-const initialState = {
-    origen: null,
-    destino: null,
-    playas: []
-};
+// export const MapContext = React.createContext();
+// const initialState = {
+//     origen: null,
+//     ruta: null,
+//     playas: []
+// };
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case actions.ACTUALIZAR_DESTINOS:
-            return { destino: action.data };
+// const reducer = (state, action) => {
+//     switch (action.type) {
+//         case actions.ACTUALIZAR_RUTA:
+//             return { ...state, ruta: action.data };
 
-        case actions.ACTUALIZAR_POSICIONES:
-            return { playas: action.data.playas, origen: action.data.origen };
+//         case actions.ACTUALIZAR_PLAYAS:
+//             return { playas: action.data.playas, origen: action.data.origen };
             
-        default:
-            return initialState;
-    }
-}
+//         default:
+//             return initialState;
+//     }
+// }
 
 export default function Inicio() {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(mapReducer, initialState);
 
     return(
         <MapContext.Provider value={{ state, dispatch }}>
