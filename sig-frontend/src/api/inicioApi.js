@@ -2,7 +2,7 @@ import { handleResponse, handleError} from './apiUtils';
 import { config } from '../constants';
 
 export const getPlayas = payload => {
-    return fetch(`${config.apiUrl}/playas`)
+    return fetch(`${config.apiUrl}/beaches`)
         .then(handleResponse)
         .catch(handleError);
 }

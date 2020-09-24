@@ -9,7 +9,7 @@ server.listen(port, () => console.log(`Escuchando en el puerto ${port}`));
 
 const api = {
     playas: {
-        url: '/api/playas',
+        url: '/api/beaches',
         file: './json/playas.json'
     },
     rutas: {

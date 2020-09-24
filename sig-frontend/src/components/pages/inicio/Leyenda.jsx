@@ -14,6 +14,8 @@ export default function Leyenda() {
                 Alta
                 <span className="icon"><img src={icons.excesiva} alt="Ocupación excesiva"/></span>
                 Excesiva
+                <span className="icon"><img src={icons.sinDatos} alt="Ocupación excesiva"/></span>
+                Sin Datos
             </small>
         </div>
     );

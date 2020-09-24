@@ -12,7 +12,8 @@ export const wmsUrl = 'https://sig.asturias.es/servicios/services/PlayasYFaros/M
 
 export const actions = {
     ACTUALIZAR_RUTA: 'ACTUALIZAR_RUTA',
-    ACTUALIZAR_POSICIONES: 'ACTUALIZAR_POSICIONES'
+    ACTUALIZAR_PLAYAS: 'ACTUALIZAR_PLAYAS',
+    SELECCIONAR_PLAYA: 'SELECCIONAR_PLAYA'
 };
 
 export const icons = {
@@ -20,5 +21,6 @@ export const icons = {
     baja: `${imgUrl}ocupacion_baja.png`,
     media: `${imgUrl}ocupacion_media.png`,
     alta: `${imgUrl}ocupacion_alta.png`,
-    excesiva: `${imgUrl}ocupacion_excesiva.png`
+    excesiva: `${imgUrl}ocupacion_excesiva.png`,
+    sinDatos: `${imgUrl}ocupacion_sinDatos.png`
 }
