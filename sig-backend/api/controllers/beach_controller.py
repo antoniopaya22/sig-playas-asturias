@@ -21,17 +21,26 @@ class BeachController:
         tim_max = float(request.json['minutes'])
         beaches = BeachRepository.get_all_beaches()
         filtered = []
+        trying_beaches = []
+        dest = ""
+        i = 1
         for beach in beaches:
-            dist = calcular_distancia(request.json['latitud'], request.json['longitud'], beach.latitud, beach.longitud)
-            if (tim_max * 60) > dist:
-                filtered.append(beach)
+            dest = dest + str(beach.latitud) + "," + str(beach.longitud)+"|"
+            trying_beaches.append(beach)
+            if i == 23:
+                valen = calcular_distancia(request.json['latitud'], request.json['longitud'], dest[:-1], tim_max)
+                for playa in valen:
+                    filtered.append(trying_beaches[playa])
+                i = 0
+                trying_beaches = []
+                dest = ""
+            i = i+1
         return [x.to_json() for x in filtered]
 
 
-def calcular_distancia(lat, long, end_lat, end_long):
+def calcular_distancia(lat, long, dest, tim_max):
     api_key = "AIzaSyCwYm3CgrdQQM_abaP45IH0OpCovrwyPQs"
     source = str(lat) + "," + str(long)
-    dest = str(end_lat) + "," + str(end_long)
     try:
         # url variable store url
         url = 'https://maps.googleapis.com/maps/api/distancematrix/json?'
@@ -40,13 +49,15 @@ def calcular_distancia(lat, long, end_lat, end_long):
                          '&key=' + api_key +
                          '&language=es')
 
-        # json method of response object
-        # return json format result
         x = r.json()
 
-        # bydefault driving mode considered
-
-        # print the vale of x
-        return dt.timedelta(seconds=x['rows'][0]['elements'][0]['duration']['value']).total_seconds()
-    except:
-        return -1
+        playas = []
+        i = 0
+        for element in x['rows'][0]['elements']:
+            if (tim_max * 60) > dt.timedelta(seconds=element['duration']['value']).total_seconds():
+                playas.append(i)
+            i = i+1
+        return playas
+    except Exception as err:
+        print(err)
+        return []
