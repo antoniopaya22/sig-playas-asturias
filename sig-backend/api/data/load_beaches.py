@@ -51,10 +51,9 @@ def get_static_info_from_geojson():
     parsed_real_time_beaches = get_occupation_api_data()
     count = 0
     for real_time_beach in parsed_real_time_beaches:
-        print(count/79 * 100)
-        count+=1
-        is_name = False
-        is_coordinate = False
+        percentage = round(count / 79 * 100, 2)
+        print(percentage+'%')
+        count += 1
         new_beach_coord = None
         new_beach_name = None
         for static_beach in beaches:
@@ -66,45 +65,9 @@ def get_static_info_from_geojson():
             for i in range(2, len(all_tds), 2):
                 properties[all_tds[i].string.lower()] = all_tds[i + 1].string
             if is_coord_in_polygon(real_time_beach['longitud'], real_time_beach['latitud'], coordinates):
-                is_coordinate = True
-                new_beach_coord = Beach(
-                    playa_id=real_time_beach['playa_id'],
-                    nombre=properties['nombre'],
-                    accesos=properties['accesos'],
-                    camping=properties['camping'],
-                    concejo=properties['concejo'],
-                    foto_estatica=properties['foto1'],
-                    foto_tiempo_real=real_time_beach['foto_tiempo_real'],
-                    longitud_playa=properties['longitud'],
-                    material=properties['material'],
-                    salvamento=properties['salvamento'],
-                    nucleo_rural=properties['nucleo rural'],
-                    nucleo_urbano=properties['nucleo urbano'],
-                    ocupacion_media=properties['grado de uso'],
-                    ocupacion_actual=real_time_beach['ocupacion_actual'],
-                    longitud=real_time_beach['longitud'],
-                    latitud=real_time_beach['latitud']
-                )
+                new_beach_coord = create_beach(real_time_beach, properties)
             elif is_name_the_same(real_time_beach['nombre'], properties['nombre']):
-                is_name = True
-                new_beach_name = Beach(
-                    playa_id=real_time_beach['playa_id'],
-                    nombre=properties['nombre'],
-                    accesos=properties['accesos'],
-                    camping=properties['camping'],
-                    concejo=properties['concejo'],
-                    foto_estatica=properties['foto1'],
-                    foto_tiempo_real=real_time_beach['foto_tiempo_real'],
-                    longitud_playa=properties['longitud'],
-                    material=properties['material'],
-                    salvamento=properties['salvamento'],
-                    nucleo_rural=properties['nucleo rural'],
-                    nucleo_urbano=properties['nucleo urbano'],
-                    ocupacion_media=properties['grado de uso'],
-                    ocupacion_actual=real_time_beach['ocupacion_actual'],
-                    longitud=real_time_beach['longitud'],
-                    latitud=real_time_beach['latitud']
-                )
+                new_beach_name = create_beach(real_time_beach, properties)
 
         if new_beach_coord is not None:
             add_to_db(new_beach_coord)
@@ -119,8 +82,26 @@ def get_static_info_from_geojson():
     return parsed_static_beaches
 
 
-
-
+def create_beach(real_time_beach, properties):
+    new_beach = Beach(
+        playa_id=real_time_beach['playa_id'],
+        nombre=properties['nombre'],
+        accesos=properties['accesos'],
+        camping=properties['camping'],
+        concejo=properties['concejo'],
+        foto_estatica=properties['foto1'],
+        foto_tiempo_real=real_time_beach['foto_tiempo_real'],
+        longitud_playa=properties['longitud'],
+        material=properties['material'],
+        salvamento=properties['salvamento'],
+        nucleo_rural=properties['nucleo rural'],
+        nucleo_urbano=properties['nucleo urbano'],
+        ocupacion_media=properties['grado de uso'],
+        ocupacion_actual=real_time_beach['ocupacion_actual'],
+        longitud=real_time_beach['longitud'],
+        latitud=real_time_beach['latitud']
+    )
+    return new_beach
 
 def add_to_db(beach):
     if BeachRepository.get_beach_by_playa_id(beach.playa_id) is None:
