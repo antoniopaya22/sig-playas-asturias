@@ -10,7 +10,20 @@
 }
 .busqueda {
     padding-top: 20px;
+    max-height: calc(100vh - 60px);
+    overflow: auto;
 }
+
+.busqueda .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.busqueda .btn-group {
+    margin-top: 1rem;
+    width: 100%;
+}
+
 .icon > img {
     margin-left: 10px;
     margin-right: 5px;
@@ -23,20 +36,14 @@
 }
 
 .gm-style-iw {
-    width: 350px;
+    width: 250px;
     height: 300px;
 }
 
-.info-playa h1 {
-    font-size: 1rem;
-    text-align: center;
+.card-text {
+    margin-bottom: .1rem;
 }
 
-.info-playa img {
-    max-width: 250px;
-}
-
-.info-playa dt {
-    display: inline-block;
-    margin-right: 10px;
+.card-playa .card-img-top {
+    max-height: 120px;
 }

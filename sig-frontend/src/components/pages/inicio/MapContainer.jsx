@@ -53,7 +53,7 @@ export default function MapContainer() {
 
     const onLoad = map => {
         dispatch({
-            type: actions.SET_INFOWINDOW,
+            type: actions.SET_MAP,
             data: map
         });
     

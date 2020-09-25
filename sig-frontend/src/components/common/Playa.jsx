@@ -2,9 +2,10 @@ import React, {useContext} from 'react';
 import { Marker } from '@react-google-maps/api';
 import { icons } from '../../constants';
 import { MapContext } from '../../context/MapContext'
+import { actions } from '../../constants';
 
 export default function Playa({ playa }) {
-    const { state } = useContext(MapContext);
+    const { state, dispatch } = useContext(MapContext);
     let marcadorActual = null;
 
     const onLoad = marker => {
@@ -12,26 +13,35 @@ export default function Playa({ playa }) {
     }
 
     const handleClick = e => {
+        setInfowindow();
+        setPlayaActual();
+    }
+
+    const setInfowindow = () => {
         const { map } = state;
         const currentInfoWindow = new window.google.maps.InfoWindow({
-            content: buildContent(),
-            maxHeight: 500
+            content: buildContent()
         });
         currentInfoWindow.open(map, marcadorActual);
     }
 
+    const setPlayaActual = () => {
+        dispatch({
+            type: actions.SELECCIONAR_PLAYA,
+            data: playa
+        });
+    }
+
     const buildContent = () => {
-        return `<div class="info-playa">
-        <h1>${playa.nombre} (${playa.concejo})</h1>
-        <img src=${playa.foto_estatica} />
-        <ul>
-            <li><strong>Ocupación actual:</strong> ${playa.ocupacion_actual}%</li>
-            <li><strong>Ocupación media:</strong> ${playa.ocupacion_media}</li>
-            <li><strong>Material:</strong> ${playa.material}</li>
-            <li><strong>Accesos:</strong> ${playa.accesos}</li>
-            <li><strong>Salvamento</strong> ${playa.salvamento}</li>
-        </ul>
-    </div>`;
+        return `
+            <div class="card card-playa">
+                <img class="card-img-top" src="${playa.foto_tiempo_real || playa.foto_estatica}" />
+                <div class="card-body">
+                    <h5 class="card-title">${playa.nombre} (${playa.concejo})</h5>
+                    <p class="card-text">Ocupación actual: ${playa.ocupacion_actual}%</p>
+                    <p class="card-text">Ocupación media: ${playa.ocupacion_media}</p>
+                </div>
+            </div>`;
     }
 
     const calcularOcupacion = valor => {

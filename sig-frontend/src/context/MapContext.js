@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { actions } from '../constants';
 
 export const initialState = {
-    infoWindow: null,
+    map: null,
     origen: null,
     ruta: null,
     playas: [],
@@ -22,8 +22,8 @@ export const mapReducer = (state, action) => {
         case actions.SELECCIONAR_PLAYA:
             return { ...state, seleccionada: action.data };
 
-        case actions.SET_INFOWINDOW:
-            return { ...state, infoWindow: action.data };
+        case actions.SET_MAP:
+            return { ...state, map: action.data };
             
         default:
             return initialState;
