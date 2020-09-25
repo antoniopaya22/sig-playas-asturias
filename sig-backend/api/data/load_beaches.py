@@ -63,8 +63,7 @@ def get_static_info_from_geojson():
                 new_beach_coord = create_beach(real_time_beach, properties)
                 break
             elif is_name_the_same(real_time_beach['nombre'], properties['nombre']) and \
-                    is_name_the_same(real_time_beach['municipio'], properties['concejo']) and \
-                    is_coord_near(real_time_beach['longitud'], real_time_beach['latitud'], coordinates, 0.001):
+                    is_name_the_same(real_time_beach['municipio'], properties['concejo']):
                 new_beach_name = create_beach(real_time_beach, properties)
                 break
             elif is_coord_near(real_time_beach['longitud'], real_time_beach['latitud'], coordinates, 0.0009):
@@ -81,6 +80,7 @@ def get_static_info_from_geojson():
             add_to_db(new_beach_static)
             parsed_static_beaches.append(new_beach_static)
             pass
+    print(len(parsed_static_beaches))
     return parsed_static_beaches
 
 
