@@ -8,7 +8,19 @@ const imgUrl = '/img/';
 
 export const config = process.env.NODE_ENV === 'development' ? dev : prod;
 export const apiKey = 'AIzaSyCwYm3CgrdQQM_abaP45IH0OpCovrwyPQs';
-export const wmsUrl = 'https://sig.asturias.es/servicios/services/PlayasYFaros/MapServer/WMSServer?request=GetCapabilities&service=WMS';
+export const wmsUrl = `https://sig.asturias.es/servicios/services/PlayasYFaros/MapServer/WMSServer?
+request=GetMap
+&service=WMS
+&version=1.1.1
+&format=image/png
+&width=256
+&height=256
+&layers=Playas
+&srs=EPSG:3857
+&styles=Default
+&transparent=true
+&bbox=
+    `;
 
 export const actions = {
     ACTUALIZAR_RUTA: 'ACTUALIZAR_RUTA',
@@ -32,7 +44,7 @@ export const mensajes = {
     cabecera: 'Localización',
     locationError: 'No ha sido posible acceder a u ubicación. Para calcular la ruta a la playa es necesario saber donde te encuentras. Pulsa en un punto del mapa desde donde quieras calcular la ruta.',
     reintentar: 'Reintentar',
-    cancelar: 'Cancelar',
+    aceptar: 'Aceptar',
     distancia: 'Como mucho ¿Cuántos minutos quieres tardar?',
     calcular: 'Calcular',
     errorDistancia: 'Debes introducir un valor numérico'
