@@ -8,9 +8,9 @@ import { getPosicionUsuario } from '../../../utils/Geolocation';
 import ModalWindow from '../../common/ModalWindow';
 import { obtenerWMS } from '../../../utils/WMS';
 
+const centro = { lat: 43.364365, lng: -5.849002 };
 export default function MapContainer() {
     const { state, dispatch } = useContext(MapContext);
-    const centro = { lat: 43.364365, lng: -5.849002 };
     const mapStyles = {width: '100%', height: '100%'};
 
     const localizar = () => {
