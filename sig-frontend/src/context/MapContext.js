@@ -14,9 +14,7 @@ export const initialState = {
         mensaje: ''
     },
     tiempo: '',
-    error: {
-        
-    }
+    error: false
 };
 
 export const MapContext = createContext();
@@ -47,9 +45,6 @@ export const mapReducer = (state, action) => {
         case actions.ACTUALIZAR_TIEMPO:
             return { ...state, tiempo: action.data }
 
-        case actions.ERROR:
-            return { ...state, error: action.data }
-            
         default:
             return initialState;
     }

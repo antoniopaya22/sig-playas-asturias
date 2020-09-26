@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { MapContext } from '../../../context/MapContext';
 import SimpleForm from './SimpleForm';
 import Leyenda from './Leyenda';
-import { actions } from '../../../constants';
+import { actions, mensajes } from '../../../constants';
 import { searchBeaches } from '../../../api/inicioApi';
 import Seleccionada from './Seleccionada';
 
@@ -18,7 +18,16 @@ export default function Busqueda() {
                 data: result
             })
         })
-        .catch(error => console.error(error));
+        .catch(_ => {
+            dispatch({
+                type: actions.SHOW_MODAL,
+                data: {
+                    show: true,
+                    cabecera: mensajes.errorHeader,
+                    mensaje: mensajes.errorBody
+                }
+            })
+        })
     };
 
     const onCalcular = e => {

@@ -41,7 +41,16 @@ export default function MapContainer() {
                 data: result
             });
         })
-        .catch(error => console.error(error));
+        .catch(_ => {
+            dispatch({
+                type: actions.SHOW_MODAL,
+                data: {
+                    show: true,
+                    cabecera: mensajes.errorHeader,
+                    mensaje: mensajes.errorBody
+                }
+            })
+        });
     }   
 
     const onLoad = map => {
@@ -83,7 +92,6 @@ export default function MapContainer() {
                     </GoogleMap>
                 </LoadScript>
             </div>
-            
             <ModalWindow />        
         </>
     );

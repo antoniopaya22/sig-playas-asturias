@@ -50,5 +50,7 @@ export const mensajes = {
     aceptar: 'Aceptar',
     distancia: 'Como mucho ¿Cuántos minutos quieres tardar?',
     calcular: 'Calcular',
-    avisoOrigen: 'Para realizar la búsqueda debes marcar el punto de origen en el mapa'
+    avisoOrigen: 'Para realizar la búsqueda debes marcar el punto de origen en el mapa',
+    errorHeader: 'Error',
+    errorBody: 'Ha ocurrido un error obteniendo los datos'
 }
