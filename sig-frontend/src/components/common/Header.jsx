@@ -17,7 +17,7 @@ export default function Header() {
                             <NavLink tag={RRNavLink} to="/historial">Historial</NavLink>
                         </NavItem>
                     </Nav>
-                    <NavbarText>Sergio Berjano | Daniel Cabal | Alba Cotarelo | Antonio Payá</NavbarText>
+                    <NavbarText>Daniel Cabal | Alba Cotarelo | Antonio Payá</NavbarText>
                 </Container>
             </Navbar>
         </header>

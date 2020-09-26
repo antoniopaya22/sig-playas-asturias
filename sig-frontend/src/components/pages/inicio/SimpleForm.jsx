@@ -1,16 +1,16 @@
 import React from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {mensajes} from '../../../constants';
 
 export default function SimpleForm({ onSubmit }) {
+    const {distancia, calcular} = mensajes;
     return(
         <Form onSubmit={onSubmit}>
             <FormGroup>
-                <Label for="ubicacion">¿Dónde te encuentras?</Label>
-                <Input type="text" name="ubicación" className="form-control" />
-                <Label for="distancia">Como mucho, ¿Cuántos minutos quieres tardar?</Label>
+                <Label for="distancia">{distancia}</Label>
                 <Input type="text" name="distancia" className="form-control" />
             </FormGroup>
-            <Button block={true}>Enviar</Button>
+            <Button block={true}>{calcular}</Button>
         </Form>
     );
 }

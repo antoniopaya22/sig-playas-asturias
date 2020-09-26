@@ -6,7 +6,8 @@ export const initialState = {
     origen: null,
     ruta: null,
     playas: [],
-    seleccionada: null
+    seleccionada: null,
+    showModal: false
 };
 
 export const MapContext = createContext();
@@ -24,6 +25,12 @@ export const mapReducer = (state, action) => {
 
         case actions.SET_MAP:
             return { ...state, map: action.data };
+
+        case actions.SET_ORIGEN:
+            return { ...state, origen: action.data }
+
+        case actions.SHOW_MODAL:
+            return { ...state, showModal: action.data}
             
         default:
             return initialState;

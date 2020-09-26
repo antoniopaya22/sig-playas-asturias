@@ -14,7 +14,9 @@ export const actions = {
     ACTUALIZAR_RUTA: 'ACTUALIZAR_RUTA',
     ACTUALIZAR_PLAYAS: 'ACTUALIZAR_PLAYAS',
     SELECCIONAR_PLAYA: 'SELECCIONAR_PLAYA',
-    SET_MAP: 'SET_MAP'
+    SET_MAP: 'SET_MAP',
+    SET_ORIGEN: 'SET_ORIGEN',
+    SHOW_MODAL: 'SHOW_MODAL'
 };
 
 export const icons = {
@@ -24,4 +26,14 @@ export const icons = {
     alta: `${imgUrl}ocupacion_alta.png`,
     excesiva: `${imgUrl}ocupacion_excesiva.png`,
     sinDatos: `${imgUrl}ocupacion_sinDatos.png`
+}
+
+export const mensajes = {
+    cabecera: 'Localización',
+    locationError: 'No ha sido posible acceder a u ubicación. Para calcular la ruta a la playa es necesario saber donde te encuentras. Pulsa en un punto del mapa desde donde quieras calcular la ruta.',
+    reintentar: 'Reintentar',
+    cancelar: 'Cancelar',
+    distancia: 'Como mucho ¿Cuántos minutos quieres tardar?',
+    calcular: 'Calcular',
+    errorDistancia: 'Debes introducir un valor numérico'
 }

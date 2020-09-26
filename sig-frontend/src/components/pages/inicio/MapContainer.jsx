@@ -1,15 +1,46 @@
 import React, { useContext } from 'react';
 import { MapContext } from '../../../context/MapContext';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { actions, apiKey, icons, wmsUrl } from '../../../constants';
+import { actions, apiKey, icons, wmsUrl, mensajes } from '../../../constants';
 import { getPlayas } from '../../../api/inicioApi';
 import Playa from '../../common/Playa';
+import { comprobarNavegador, getPosicionUsuario } from '../../../utils/Geolocation';
+import ModalWindow from '../../common/ModalWindow';
 
 const centro = { lat: 43.364365, lng: -5.849002 };
 const mapStyles = {width: '100%', height: '100%'};
 export default function MapContainer() {
     const { state, dispatch } = useContext(MapContext);
+    // const [modal, setModal] = useState(false);
     // const [map, setMap] = useState(null);
+
+    const localizar = () => {
+        getPosicionUsuario()
+        .then(result => {
+            dispatch({
+                type: actions.SET_ORIGEN,
+                data: result
+            });
+        })
+        .catch(error => {
+            dispatch({
+                type: actions.SHOW_MODAL,
+                data: true
+            });
+        })
+
+    }
+
+    const obtenerPlayas = () => {
+        getPlayas()
+        .then(result => {
+            dispatch({
+                type: actions.ACTUALIZAR_PLAYAS,
+                data: result
+            });
+        })
+        .catch(error => console.error(error));
+    }
 
     const EXTENT = [-Math.PI * 6378137, Math.PI * 6378137];
 
@@ -55,19 +86,13 @@ export default function MapContainer() {
         dispatch({
             type: actions.SET_MAP,
             data: map
-        });
-    
-        getPlayas()
-        .then(result => {
-            dispatch({
-                type: actions.ACTUALIZAR_PLAYAS,
-                data: result
-            });
-        })
-        .catch(error => console.error(error));
+        });    
+        obtenerPlayas();
+        localizar();
     };
 
     return (
+        <>
         <div className="map-container">
             <LoadScript googleMapsApiKey={apiKey}>
                 <GoogleMap 
@@ -76,7 +101,7 @@ export default function MapContainer() {
                     zoom={9} 
                     mapContainerStyle={mapStyles} >
 
-                    <Marker position={centro} icon={icons.hotel} /> 
+                    { state.origen && <Marker position={state.origen} icon={icons.hotel} /> }
                     
                     { state.playas && state.playas.length && 
                         state.playas.map ( p => <Playa playa={p} key={p.id} /> )
@@ -84,5 +109,13 @@ export default function MapContainer() {
                 </GoogleMap>
             </LoadScript>
         </div>
+        
+            <ModalWindow 
+                cabecera={mensajes.cabecera} 
+                mensaje={mensajes.locationError} 
+                buttonLabel1={mensajes.cancelar}
+            />
+        
+        </>
     );
 }
