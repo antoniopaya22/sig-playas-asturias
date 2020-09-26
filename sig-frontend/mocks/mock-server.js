@@ -12,8 +12,12 @@ const api = {
         url: '/api/beaches',
         file: './json/playas.json'
     },
-    rutas: {
+    search: {
         url: '/api/search',
+        file: './json/search.json'
+    },
+    rutas: {
+        url: '/api/rutas',
         file: './json/rutas.json'
     }
 };
@@ -22,6 +26,10 @@ server.get(api.playas.url, (req, res) => {
     res.send(JSON.stringify(require(api.playas.file)));
 });
 
-server.get(api.rutas.url, (req, res) => {
+server.post(api.rutas.url, (req, res) => {
     res.send(JSON.stringify(require(api.rutas.file)));
+});
+
+server.post(api.search.url, (req, res) => {
+    res.send(JSON.stringify(require(api.search.file)));
 });

@@ -3,7 +3,7 @@ import { MapContext } from '../../../context/MapContext';
 import SimpleForm from './SimpleForm';
 import Leyenda from './Leyenda';
 import { actions } from '../../../constants';
-import { getPlayas } from '../../../api/inicioApi';
+import { searchBeaches } from '../../../api/inicioApi';
 import Seleccionada from './Seleccionada';
 
 export default function Busqueda() {
@@ -11,7 +11,7 @@ export default function Busqueda() {
 
     const handleSubmitSearch = (e) => {
         e.preventDefault();
-        getPlayas()
+        searchBeaches()
         .then(result => {
             dispatch({
                 type: actions.ACTUALIZAR_PLAYAS,

@@ -4,8 +4,6 @@ import { MapContext, mapReducer, initialState } from '../../../context/MapContex
 import './Inicio.css';
 import { Container, Row, Col } from 'reactstrap';
 import Busqueda from './Busqueda';
-import ModalWindow from '../../common/ModalWindow';
-
 
 export default function Inicio() {
     const [state, dispatch] = useReducer(mapReducer, initialState);

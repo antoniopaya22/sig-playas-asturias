@@ -1,24 +1,23 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { MapContext } from '../../context/MapContext';
 import {actions} from '../../constants'
 
-export default function ModalWindow({cabecera, mensaje, buttonLabel1, buttonLabel2, buttonAction}){
+export default function ModalWindow(){
     const {state, dispatch} = useContext(MapContext);
+    const {showModal} = state;
     const toggle = () => {
-        dispatch({type: actions.SHOW_MODAL, data: false})
+        dispatch({type: actions.SHOW_MODAL, data: {show: false}})
     }
 
     return (
-        <Modal isOpen={state.showModal} toggle={toggle} >
-        <ModalHeader toggle={toggle}>{cabecera}</ModalHeader>
+        <Modal isOpen={showModal.show} toggle={toggle} >
+        <ModalHeader toggle={toggle}>{showModal.cabecera}</ModalHeader>
         <ModalBody>
-            { mensaje }
+            { showModal.mensaje }
         </ModalBody>
         <ModalFooter>
-            { buttonLabel2 && <Button color="primary" onClick={buttonAction}>{buttonLabel2}</Button> } 
-            {' '}
-            { buttonLabel1 && <Button color="secondary" onClick={toggle}>{buttonLabel1}</Button> }
+            <Button color="secondary" onClick={toggle}>Aceptar</Button>
         </ModalFooter>
         </Modal>
       );

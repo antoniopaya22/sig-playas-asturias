@@ -6,13 +6,22 @@ import { actions } from '../../constants';
 
 export default function Playa({ playa }) {
     const { state, dispatch } = useContext(MapContext);
-    let marcadorActual = null;
 
-    const onLoad = marker => {
-        marcadorActual = marker;
+    const getMarcador = () => {
+        return state.marcadores.find(m => playa.id === m.playaId).marcador;
     }
 
-    const handleClick = e => {
+    const onLoad = marker => {
+        dispatch({
+            type: actions.ACTUALIZAR_MARCADOR_PLAYA,
+            data: {
+                playaId: playa.id,
+                marcador: marker
+            }
+        });
+    }
+
+    const handleClick = _ => {
         setInfowindow();
         setPlayaActual();
     }
@@ -22,7 +31,7 @@ export default function Playa({ playa }) {
         const currentInfoWindow = new window.google.maps.InfoWindow({
             content: buildContent()
         });
-        currentInfoWindow.open(map, marcadorActual);
+        currentInfoWindow.open(map, getMarcador());
     }
 
     const setPlayaActual = () => {

@@ -25,10 +25,13 @@ request=GetMap
 export const actions = {
     ACTUALIZAR_RUTA: 'ACTUALIZAR_RUTA',
     ACTUALIZAR_PLAYAS: 'ACTUALIZAR_PLAYAS',
+    ACTUALIZAR_MARCADOR_PLAYA: 'ACTUALIZAR_MARCADOR_PLAYA',
     SELECCIONAR_PLAYA: 'SELECCIONAR_PLAYA',
     SET_MAP: 'SET_MAP',
     SET_ORIGEN: 'SET_ORIGEN',
-    SHOW_MODAL: 'SHOW_MODAL'
+    SHOW_MODAL: 'SHOW_MODAL',
+    ACTUALIZAR_TIEMPO: 'ACTUALIZAR_TIEMPO',
+    ERROR: 'ERROR'
 };
 
 export const icons = {
@@ -47,5 +50,5 @@ export const mensajes = {
     aceptar: 'Aceptar',
     distancia: 'Como mucho ¿Cuántos minutos quieres tardar?',
     calcular: 'Calcular',
-    errorDistancia: 'Debes introducir un valor numérico'
+    avisoOrigen: 'Para realizar la búsqueda debes marcar el punto de origen en el mapa'
 }

@@ -7,13 +7,12 @@ export const getPosicionUsuario = () => {
         if(!comprobarNavegador)
             reject(false);
         else 
-        navigator.geolocation.getCurrentPosition(pos => {
-            // console.log(pos);
-            resolve({
-                lat: pos.coords.latitude,
-                lng: pos.coords.longitude
-            })
-        }, error => {
+            navigator.geolocation.getCurrentPosition(pos => {
+                resolve({
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude
+                })
+            }, error => {
                 reject(error);
             }
         )

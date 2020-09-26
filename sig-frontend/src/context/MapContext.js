@@ -6,8 +6,17 @@ export const initialState = {
     origen: null,
     ruta: null,
     playas: [],
+    marcadores: [],
     seleccionada: null,
-    showModal: false
+    showModal: {
+        show: false,
+        cabecera: '',
+        mensaje: ''
+    },
+    tiempo: '',
+    error: {
+        
+    }
 };
 
 export const MapContext = createContext();
@@ -20,6 +29,9 @@ export const mapReducer = (state, action) => {
         case actions.ACTUALIZAR_PLAYAS:
             return { ...state, playas: action.data };
 
+        case actions.ACTUALIZAR_MARCADOR_PLAYA:
+            return { ...state, marcadores: [...state.marcadores, {playaId: action.data.playaId, marcador: action.data.marcador}]}
+
         case actions.SELECCIONAR_PLAYA:
             return { ...state, seleccionada: action.data };
 
@@ -31,6 +43,12 @@ export const mapReducer = (state, action) => {
 
         case actions.SHOW_MODAL:
             return { ...state, showModal: action.data}
+
+        case actions.ACTUALIZAR_TIEMPO:
+            return { ...state, tiempo: action.data }
+
+        case actions.ERROR:
+            return { ...state, error: action.data }
             
         default:
             return initialState;
