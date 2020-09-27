@@ -13,10 +13,6 @@ export default function SimpleForm({ onSubmit }) {
                 type: actions.ACTUALIZAR_TIEMPO,
                 data: e.target.value
             });
-            dispatch({
-                type: actions.ERROR,
-                data: true
-            })
         }
     }
 
