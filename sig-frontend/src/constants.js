@@ -1,5 +1,5 @@
 const dev = {
-    apiUrl: 'http://localhost:3001/api'
+    apiUrl: 'http://localhost:3000/api'
 };
 const prod = {
     apiUrl: 'http://localhost:3000/api'
