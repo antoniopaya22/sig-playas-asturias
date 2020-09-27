@@ -11,6 +11,7 @@ services:
   sig-frontend:
     build: sig-frontend
     container_name: sig-frontend
+    stdin_open: true
     volumes:
       - ./sig-frontend:/usr/src/app
       - /usr/src/app/node_modules
