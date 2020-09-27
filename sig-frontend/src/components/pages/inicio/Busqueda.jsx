@@ -13,8 +13,8 @@ export default function Busqueda() {
         e.preventDefault();
         searchBeaches({
             minutes: state.tiempo,
-            latitud: state.origen.lat,
-            longitud: state.origen.lng
+            latitud: state.origen.lat + '',
+            longitud: state.origen.lng + ''
         })
         .then(result => {
             dispatch({
@@ -34,11 +34,6 @@ export default function Busqueda() {
         })
     };
 
-    const onCalcular = e => {
-        e.preventDefault();
-        console.log('ruta');
-    }
-    
     const onCancelar = e => {
         e.preventDefault();
         dispatch({
@@ -54,7 +49,7 @@ export default function Busqueda() {
                     <SimpleForm onSubmit={handleSubmitSearch} /> 
                     <Leyenda />
                 </> }
-            { state.seleccionada && <Seleccionada playa={state.seleccionada} handleCalcular={onCalcular} handleCancelar={onCancelar} /> }
+            { state.seleccionada && <Seleccionada playa={state.seleccionada} handleCancelar={onCancelar} /> }
         </div>
     );
 }

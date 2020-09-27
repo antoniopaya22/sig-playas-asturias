@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardTitle, CardText, Button, ButtonGroup} from 'reactstrap';
 
-export default function Seleccionada({ playa, handleCalcular, handleCancelar }) {
+export default function Seleccionada({ playa, handleCancelar }) {
     return(
         <Card>
             <CardImg src={playa.foto_tiempo_real || playa.foto_estatica} />
@@ -41,8 +41,7 @@ export default function Seleccionada({ playa, handleCalcular, handleCancelar }) 
                         <span className="text-primary"> Núcleo urbano más cercano:</span> {playa.nucleo_urbano}
                     </CardText> }
                 <ButtonGroup>
-                    <Button onClick={handleCalcular} color="success">Calcular ruta</Button>
-                    <Button onClick={handleCancelar} color="danger">Cancelar</Button>
+                    <Button onClick={handleCancelar} color="danger">Cerrar</Button>
                 </ButtonGroup>
             </CardBody>
         </Card>

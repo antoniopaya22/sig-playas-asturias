@@ -44,7 +44,7 @@ export default function Playa({ playa }) {
     const buildContent = () => {
         return `
             <div class="card card-playa">
-                <img class="card-img-top" src="${playa.foto_tiempo_real || playa.foto_estatica}" />
+                <img class="card-img-top" src="${playa.foto_estatica}" />
                 <div class="card-body">
                     <h5 class="card-title">${playa.nombre} (${playa.concejo})</h5>
                     <p class="card-text">

@@ -16,8 +16,3 @@ export const searchBeaches = payload => {
     .catch(handleError);
 }
 
-export const getRuta = payload => {
-    return fetch(`${config.apiUrl}/rutas`)
-        .then(handleResponse)
-        .catch(handleError);
-}

@@ -18,13 +18,3 @@ export const getPosicionUsuario = () => {
         )
     })
 }
-
-export const _getPosicionUsuario = async () => {
-    navigator.geolocation.getCurrentPosition(pos => {
-        console.log('geolocation pos', pos)
-        return ({
-            lat: pos.coords.latitude,
-            lng: pos.coords.longitude
-        }, error => error)
-    })
-}
