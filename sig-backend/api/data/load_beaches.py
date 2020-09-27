@@ -27,7 +27,7 @@ def get_occupation_api_data():
                 if len(beaches_occ[key]['fotos']) == 0:
                     new_beach['foto_tiempo_real'] = None
                 else:
-                    new_beach['foto_tiempo_real'] = beaches_occ[key]['fotos'][0]
+                    new_beach['foto_tiempo_real'] = 'https://playas.asturias.es'+beaches_occ[key]['fotos'][0]
             else:
                 new_beach['ocupacion_actual'] = -1.0
                 new_beach['foto_tiempo_real'] = None
