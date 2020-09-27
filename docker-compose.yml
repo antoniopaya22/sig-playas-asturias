@@ -6,7 +6,7 @@ services:
       build: sig-backend
       container_name: sig-backend
       ports:
-        - "3000:3000"
+        - "5000:5000"
 
   sig-frontend:
     build: sig-frontend
@@ -16,6 +16,6 @@ services:
       - /usr/src/app/node_modules
       - /usr/src/app/.next
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - "sig-backend"
