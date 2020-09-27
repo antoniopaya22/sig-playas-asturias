@@ -5,7 +5,7 @@ from api import db
 class OccupationRepository:
 
     @staticmethod
-    def get_all_ocupationes():
+    def get_all_occupations():
         try:
             return Occupation.query.all()
         except:
@@ -35,7 +35,7 @@ class OccupationRepository:
         try:
             return Occupation.query.filter_by(playa_id=playa_id).all()
         except:
-            return None
+            return []
 
     @staticmethod
     def get_occupation_by_id(id):

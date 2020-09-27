@@ -1,4 +1,4 @@
-import { handleResponse, handleError} from './apiUtils';
+import { handleResponse, handleError } from './apiUtils';
 import { config } from '../constants';
 
 export const getPlayas = () => {
@@ -9,10 +9,13 @@ export const getPlayas = () => {
 
 export const searchBeaches = payload => {
     return fetch(`${config.apiUrl}/search`, {
-        method: 'POST',
-        body: JSON.stringify(payload)
-    })
-    .then(handleResponse)
-    .catch(handleError);
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(handleResponse)
+        .catch(handleError);
 }
-

@@ -28,7 +28,7 @@ def _load_occupations(app):
                 occupation = Occupation(
                     playa_id=playa_id,
                     timestamp=beach['hora'],
-                    occupacion=float(beach['medicion']),
+                    ocupacion=float(beach['medicion']),
                     bajamar=beach['bajamar'],
                     pleamar=beach['pleamar']
                 )

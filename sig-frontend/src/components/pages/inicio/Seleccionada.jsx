@@ -7,10 +7,10 @@ export default function Seleccionada({ playa, handleCancelar }) {
             <CardImg src={playa.foto_tiempo_real || playa.foto_estatica} />
             <CardBody>
                 <CardTitle>{`${playa.nombre} (${playa.concejo})`}</CardTitle>
-                { playa.ocupacion_actual && 
+                { playa.ocupacion_actual != undefined && 
                     <CardText>
                         <span className="text-primary"> Ocupación:</span> 
-                        {Number(playa.ocupacion_actual) === -1 ? ' Sin datos' : Number(playa.ocupacion_actual).toFixed(2) + '%'}
+                        {Number(playa.ocupacion_actual) === -1 ? ' Sin datos' : ' ' + Number(playa.ocupacion_actual).toFixed(2) + '%'}
                     </CardText> }
                 { playa.ocupacion_media && 
                     <CardText>
