@@ -2,7 +2,7 @@ const dev = {
     apiUrl: 'http://localhost:3001/api'
 };
 const prod = {
-    apiUrl: ''
+    apiUrl: 'http://localhost:3000/api'
 };
 const imgUrl = '/img/';
 
