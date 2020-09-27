@@ -37,7 +37,6 @@ def get_occupation_api_data():
             new_beach['municipio'] = beaches_list[key]['municipio']
             parsed_beaches.append(new_beach)
         except Exception as err:
-            print(new_beach['nombre'] + " (" + beaches_list[key]['municipio'] + ") no se pudo cargar")
             pass
     return parsed_beaches
 
@@ -80,7 +79,6 @@ def get_static_info_from_geojson():
             add_to_db(new_beach_static)
             parsed_static_beaches.append(new_beach_static)
             pass
-    print(len(parsed_static_beaches))
     return parsed_static_beaches
 
 
