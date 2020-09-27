@@ -47,8 +47,13 @@ export default function Playa({ playa }) {
                 <img class="card-img-top" src="${playa.foto_tiempo_real || playa.foto_estatica}" />
                 <div class="card-body">
                     <h5 class="card-title">${playa.nombre} (${playa.concejo})</h5>
-                    <p class="card-text">Ocupación actual: ${playa.ocupacion_actual}%</p>
-                    <p class="card-text">Ocupación media: ${playa.ocupacion_media}</p>
+                    <p class="card-text">
+                        <span class="text-primary">Ocupación actual:</span> 
+                        ${Number(playa.ocupacion_actual) === -1 ? ' Sin datos' : Number(playa.ocupacion_actual).toFixed(2) + '%'}
+                    </p>
+                    <p class="card-text">
+                        <span class="text-primary">Ocupación media:</span> ${playa.ocupacion_media}
+                    </p>
                 </div>
             </div>`;
     }
