@@ -1,8 +1,8 @@
 const dev = {
-    apiUrl: 'http://sig-backend:5000/api'
+    apiUrl: 'http://156.35.95.126:5000/api'
 };
 const prod = {
-    apiUrl: 'http://sig-backend:5000/api'
+    apiUrl: 'http://156.35.95.126:5000/api'
 };
 const imgUrl = '/img/';
 
