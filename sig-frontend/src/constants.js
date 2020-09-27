@@ -1,8 +1,8 @@
 const dev = {
-    apiUrl: 'http://localhost:5000/api'
+    apiUrl: 'http://sig-backend:5000/api'
 };
 const prod = {
-    apiUrl: 'http://localhost:5000/api'
+    apiUrl: 'http://sig-backend:5000/api'
 };
 const imgUrl = '/img/';
 
