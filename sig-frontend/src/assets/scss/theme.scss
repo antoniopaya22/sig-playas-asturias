@@ -1,0 +1,37 @@
+@import 'theme/variables';
+@import 'theme/mixins';
+
+// Plugins CSS
+@import "theme/plugins/plugin-animate-bootstrap-notify";
+@import "theme/plugins/plugin-perfect-scrollbar";
+
+// Core CSS
+@import "theme/buttons";
+@import "theme/inputs";
+@import "theme/typography";
+@import "theme/misc";
+@import "theme/checkboxes-radio";
+
+// components
+@import "theme/navbar";
+@import "theme/page-header";
+@import "theme/dropdown";
+@import "theme/alerts";
+@import "theme/images";
+@import "theme/nucleo-outline";
+@import "theme/tables";
+@import "theme/sidebar-and-main-panel";
+@import "theme/footers";
+@import "theme/fixed-plugin";
+
+// cards
+@import "theme/cards";
+@import "theme/cards/card-plain";
+@import "theme/cards/card-chart";
+@import "theme/cards/card-user";
+@import "theme/cards/card-map";
+
+@import "theme/responsive";
+
+// react
+@import "theme/react/react-differences";

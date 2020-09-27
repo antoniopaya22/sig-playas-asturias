@@ -9,13 +9,18 @@ export const getPlayas = () => {
 
 export const searchBeaches = payload => {
     return fetch(`${config.apiUrl}/search`, {
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            }),
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
             body: JSON.stringify(payload)
         })
+        .then(handleResponse)
+        .catch(handleError);
+}
+
+export const searchOcupations = playa_id => {
+    return fetch(`${config.apiUrl}/occupations/playa/${playa_id}`)
         .then(handleResponse)
         .catch(handleError);
 }
