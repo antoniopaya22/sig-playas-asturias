@@ -11,7 +11,11 @@ export default function Busqueda() {
 
     const handleSubmitSearch = (e) => {
         e.preventDefault();
-        searchBeaches()
+        searchBeaches({
+            minutes: state.tiempo,
+            latitud: state.origen.lat,
+            longitud: state.origen.lng
+        })
         .then(result => {
             dispatch({
                 type: actions.ACTUALIZAR_PLAYAS,
