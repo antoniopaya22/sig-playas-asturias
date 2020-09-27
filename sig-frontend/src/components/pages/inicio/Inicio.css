@@ -10,7 +10,20 @@
 }
 .busqueda {
     padding-top: 20px;
+    max-height: calc(100vh - 60px);
+    overflow: auto;
 }
+
+.busqueda .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.busqueda .btn-group {
+    margin-top: 1rem;
+    width: 100%;
+}
+
 .icon > img {
     margin-left: 10px;
     margin-right: 5px;
@@ -20,4 +33,17 @@
 .leyenda {
     text-align: center;
     padding: 10px 0;
+}
+
+.gm-style-iw {
+    width: 250px;
+    height: 300px;
+}
+
+.card-text {
+    margin-bottom: .1rem;
+}
+
+.card-playa .card-img-top {
+    max-height: 120px;
 }
