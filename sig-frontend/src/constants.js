@@ -1,8 +1,8 @@
 const dev = {
-    apiUrl: 'http://localhost:3000/api'
+    apiUrl: 'http://localhost:5000/api'
 };
 const prod = {
-    apiUrl: 'http://localhost:3000/api'
+    apiUrl: 'http://localhost:5000/api'
 };
 const imgUrl = '/img/';
 

@@ -21,6 +21,10 @@ export default function Seleccionada() {
                     <h3>Manual de uso:</h3>
                     <p>En el mapa se encuentran representadas las playas de Asturias junto con su índice de ocupación.</p>
                     <p>Si pulsas en una de las playas podrás obtener información más detallada de esta.</p>
+                    <hr/>
+                    <p>Tienes la opción de buscar las playas mas cercanas a tu localización actual (si has aceptado los permisos)
+                        o al punto que selecciones en el mapa (con el marcador azul).
+                    </p>
                 </> }
             { state.seleccionada && 
                 <>
