@@ -1,12 +1,14 @@
 from flask import Flask
 from .config import get_mode
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 db = SQLAlchemy()
 
 def create_app(mode):
     """Construct the core application."""
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(get_mode(mode))
     db.init_app(app)
 
